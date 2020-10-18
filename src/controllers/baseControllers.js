@@ -1,11 +1,13 @@
 const indexController = require('./index');
 const userController = require('./user');
-const loginController = require('./login');
-const registerController = require('./register');
+const {loginPostController, loginGetController} = require('./login');
+const {registerGetController, registerPostController} = require('./register');
 
 module.exports = {
     indexController,
     userController,
-    loginController,
-    registerController
+    loginGetController,
+    loginPostController,
+    registerGetController,
+    registerPostController
 }

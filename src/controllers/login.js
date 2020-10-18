@@ -1,5 +1,16 @@
-const loginController = (req,res) => {
+const loginGetController = (req,res) => {
+    // display form
     res.render('login');
 }
 
-module.exports = loginController;
+const loginPostController = (req,res) => {
+    // store to database
+    // redirect
+    res.redirect('/user');
+    // res.render('register');
+}
+
+module.exports = {
+    loginGetController,
+    loginPostController
+};
