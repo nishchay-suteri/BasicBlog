@@ -1,0 +1,28 @@
+{
+  "name": "basic_blog",
+  "version": "1.0.0",
+  "description": "A web app project or managing blogs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev-start": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nishchay271095/BasicBlog.git"
+  },
+  "author": "Nishchay Suteri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nishchay271095/BasicBlog/issues"
+  },
+  "homepage": "https://github.com/nishchay271095/BasicBlog#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.5"
+  }
+}
