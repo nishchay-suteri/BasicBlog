@@ -1,5 +1,5 @@
 const loginController = (req,res) => {
-    res.send('Login');
+    res.render('login');
 }
 
 module.exports = loginController;

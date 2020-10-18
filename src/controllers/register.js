@@ -1,5 +1,5 @@
 const registerController = (req,res) => {
-    res.send('Register');
+    res.render('register');
 }
 
 module.exports = registerController;

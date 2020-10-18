@@ -1,5 +1,5 @@
 const userController = (req,res) => {
-    res.send('User Home');
+    res.render('user')
 }
 
 module.exports = userController;
