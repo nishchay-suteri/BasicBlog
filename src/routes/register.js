@@ -1,11 +1,12 @@
 const express = require('express');
 const { registerGetController, registerPostController } = require('../controllers/baseControllers');
-const { registerUserMiddleware } = require('../middlewares/userValidationMW');
+const { registerUserValidationMW } = require('../middlewares/userValidationMW');
+const { redirectUserPageMW } = require('../middlewares/redirectMw');
 
 const router = express.Router();
 
 // GET /register
-router.get('/', registerGetController);
+router.get('/', redirectUserPageMW, registerGetController);
 
 // POST /register
 /*
@@ -16,7 +17,7 @@ router.get('/', registerGetController);
 "userConfirmPassword": "hello"
 }
 */
-router.post('/', registerUserMiddleware, registerPostController);
+router.post('/', redirectUserPageMW, registerUserValidationMW, registerPostController);
 
 
 module.exports = router;

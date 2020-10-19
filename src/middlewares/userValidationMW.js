@@ -1,6 +1,6 @@
 const {registerUserValidator, loginUserValidator} = require('../validations/user/UserValidation');
 
-const registerUserMiddleware = (req,res,next) => {
+const registerUserValidationMW = (req,res,next) => {
     const {value, error} = registerUserValidator(req.body);
     if(error)
     {
@@ -12,7 +12,7 @@ const registerUserMiddleware = (req,res,next) => {
     }
 }
 
-const loginUserMiddleware = (req,res,next) => {
+const loginUserValidationMW = (req,res,next) => {
     const {value, error} = loginUserValidator(req.body);
     if(error)
     {
@@ -25,6 +25,6 @@ const loginUserMiddleware = (req,res,next) => {
 }
 
 module.exports = {
-    registerUserMiddleware,
-    loginUserMiddleware
+    registerUserValidationMW,
+    loginUserValidationMW
 }
