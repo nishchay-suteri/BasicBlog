@@ -13,6 +13,7 @@ const SESS_LIFETIME = Number(process.env.SESS_LIFETIME || TWO_HOURS);
 const NODE_ENV = process.env.NODE_ENV || DEFAULT_ENV;
 const SESSION_NAME = process.env.SESSION_NAME || DEFAULT_SESSION_NAME;
 const SESS_SECRET = process.env.SESSION_SECRET || DEFAULT_SESS_SECRET;
+const DB_URI = process.env.DB_URI;
 
 const IN_PROD = NODE_ENV === 'production';
 
@@ -21,5 +22,6 @@ module.exports = {
     SESS_LIFETIME,
     IN_PROD,
     SESSION_NAME,
-    SESS_SECRET
+    SESS_SECRET,
+    DB_URI
 }

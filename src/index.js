@@ -5,6 +5,7 @@ const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
+const mongoose = require('mongoose');
 
 // Declared js files
 const GLOBALS = require('./constants/globals');
@@ -15,6 +16,7 @@ const app = express();
 
 // Middlewares
 app.use(cors({optionsSuccessStatus: 200}));
+
 app.use(session({
     name: GLOBALS.SESSION_NAME,
     resave: false,
@@ -32,7 +34,13 @@ app.use(express.json()); // Parse JSON bodies (as sent by API clients)
 app.use(express.urlencoded({extended: true})); // Parse URL-encoded bodies (as sent by HTML forms)
 
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs')
+app.set('view engine', 'ejs');
+
+// Mongoose Warning Resolution
+mongoose.set('useUnifiedTopology', true);
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useCreateIndex', true);
+// mongoose.set('useFindAndModify', false);
 
 // Middlewares - Routes
 app.use(indexRouter);
@@ -40,5 +48,9 @@ app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/user', userRouter);
 
-// Server Start
-app.listen(GLOBALS.SERVER_PORT, ()=>console.log(`Server is running on port ${GLOBALS.SERVER_PORT}`));
+// DB Connection
+mongoose.connect(GLOBALS.DB_URI, ()=>{
+    console.log(`Connected to DB!`)
+    // Server Start
+    app.listen(GLOBALS.SERVER_PORT, ()=>console.log(`Server is running on port ${GLOBALS.SERVER_PORT}`));
+});
