@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const { request } = require('express');
 const User = require('../models/User');
 
 const loginGetController = (req,res) => {
@@ -14,17 +15,18 @@ const loginPostController = async (req,res) => {
         {
             return res.status(400).send(`User doesn't Exist`);
         }
-
         const isValidPassword = await bcrypt.compare(req.body.userPassword,user.userPassword);
         if(!isValidPassword)
         {
             return res.status(400).send(`Password Wrong`);
         }
+        req.session.user = user;
         return res.redirect('/user');
     }
     catch(err)
     {
-        return res.status(400).send(`Server Error`);
+        return res.json(err);
+        // return res.status(400).send(`Server Error`);
     }
 }
 

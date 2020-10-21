@@ -6,13 +6,15 @@ const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
 const mongoose = require('mongoose');
-const MongoStore = require('connect-mongo')(session);
+const connectMongo = require('connect-mongo');
+
 
 // Declared js files
 const GLOBALS = require('./constants/globals');
 const { indexRouter , loginRouter, registerRouter, userRouter } = require('./routes/baseRoutes');
 
 // Variables
+const MongoStore = connectMongo(session);
 const app = express();
 
 // Middlewares
@@ -23,17 +25,22 @@ const sessionStore = new MongoStore({
     collection: 'sessions'
 });
 
+// CONFIGUURE SESSION
+// if running the code behind proxy(Nginx), use following:-
+// app.set('trust-proxy', 1); // => Since behind proxy, we'll be using http (NOT https), but our cookie is configured "Secure"(Secure: IN_PROD)
+
 app.use(session({
-    name: GLOBALS.SESSION_NAME,
+    store: sessionStore,
+    secret: GLOBALS.SESS_SECRET,
     resave: false,
     saveUninitialized: false,
-    secret: GLOBALS.SESS_SECRET,
+    name: GLOBALS.SESSION_NAME,
     cookie: {
-        maxAge: GLOBALS.SESS_LIFETIME,
+        maxAge: GLOBALS.SESS_LIFETIME, // Max Age of cookie in milli-seconds
         sameSite: true, // strict is almost same as true
-        secure: GLOBALS.IN_PROD
-    },
-    store: sessionStore
+        secure: GLOBALS.IN_PROD, // If this is true, only transfer cookies over https
+        httpOnly: true // if true, prevents client side JS from reading the cookie
+    }
 }));
 
 app.use(express.static(path.join(__dirname, '../public'))); // To serve static contents

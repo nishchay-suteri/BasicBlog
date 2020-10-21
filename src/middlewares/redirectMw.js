@@ -1,5 +1,5 @@
 const redirectLoginPageMW = (req,res,next)=>{
-    if(!req.session.userId)
+    if(!req.session.user)
     {
         res.redirect('/login');
     }
@@ -10,7 +10,7 @@ const redirectLoginPageMW = (req,res,next)=>{
 };
 
 const redirectUserPageMW = (req,res, next) =>{
-    if(req.session.userId)
+    if(req.session.user)
     {
         res.redirect('/user');
     }
