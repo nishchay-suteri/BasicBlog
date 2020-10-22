@@ -4,45 +4,24 @@ const path = require('path');
 // Installed Packages
 const express = require('express');
 const cors = require('cors');
-const session = require('express-session');
 const mongoose = require('mongoose');
-const connectMongo = require('connect-mongo');
-
 
 // Declared js files
 const GLOBALS = require('./constants/globals');
+const sessionMw = require('./middlewares/sessionMw');
 const { indexRouter , loginRouter, registerRouter, userRouter } = require('./routes/baseRoutes');
 
 // Variables
-const MongoStore = connectMongo(session);
 const app = express();
 
 // Middlewares
 app.use(cors({optionsSuccessStatus: 200}));
 
-const sessionStore = new MongoStore({
-    mongooseConnection: mongoose.connection, // NOTE: this can work before calling mongoose.connect().. But i think better to call connect() first[Not doing currently]
-    collection: 'sessions'
-});
-
 // CONFIGUURE SESSION
 // if running the code behind proxy(Nginx), use following:-
 // app.set('trust-proxy', 1); // => Since behind proxy, we'll be using http (NOT https), but our cookie is configured "Secure"(Secure: IN_PROD)
 
-app.use(session({
-    store: sessionStore,
-    secret: GLOBALS.SESS_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    name: GLOBALS.SESSION_NAME,
-    cookie: {
-        maxAge: GLOBALS.SESS_LIFETIME, // Max Age of cookie in milli-seconds
-        sameSite: true, // strict is almost same as true
-        secure: GLOBALS.IN_PROD, // If this is true, only transfer cookies over https
-        httpOnly: true // if true, prevents client side JS from reading the cookie
-    }
-}));
-
+app.use(sessionMw);
 app.use(express.static(path.join(__dirname, '../public'))); // To serve static contents
 app.use(express.json()); // Parse JSON bodies (as sent by API clients)
 app.use(express.urlencoded({extended: true})); // Parse URL-encoded bodies (as sent by HTML forms)
