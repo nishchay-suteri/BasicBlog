@@ -1,5 +1,4 @@
-const bcrypt = require('bcrypt');
-const User = require('../models/User');
+const UserDAO = require('../dao/User');
 
 
 const registerGetController = (req,res) => {
@@ -12,30 +11,20 @@ const registerPostController = async (req,res) => {
     try
     {
         // CHECK IF USER IS ALAREDY THERE
-        const emailExist = await User.findOne({userEmail: req.body.userEmail});
+        const emailExist = await UserDAO.findUserByEmail(req,res);
         if(emailExist)
         {
             return res.status(400).send(`${req.body.userEmail} already exists`);
         }
-
-        // HASH THE PASSWORD
-        const salt = await bcrypt.genSalt();
-        const hashedPassword = await bcrypt.hash(req.body.userPassword, salt);
-
-        // CREATE New User
-        const user = new User({
-            userName: req.body.userName,
-            userEmail: req.body.userEmail,
-            userPassword: hashedPassword
-        });
-
+       
         try{
-            // SEND DATA TO DB TO STORE USER
-            const createdUser = await user.save();
+            const createdUser = UserDAO.createUser(req, res);
+            req.session.user = createdUser;
             // redirect
             return res.redirect(`/user`);
         }
         catch(err){
+            console.error(err);
             return res.status(400).send(`Server Error!`);
         }
         

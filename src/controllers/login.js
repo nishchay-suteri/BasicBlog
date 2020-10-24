@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
-const { request } = require('express');
-const User = require('../models/User');
+const UserDAO = require('../dao/User');
+
 
 const loginGetController = (req,res) => {
     // display form
@@ -10,7 +10,7 @@ const loginGetController = (req,res) => {
 const loginPostController = async (req,res) => {
     try{
         // CHECK IF USER IS ALAREDY THERE
-        const user = await User.findOne({ userEmail: req.body.userEmail});
+        const user = await UserDAO.findUserByEmail(req,res);
         if(!user)
         {
             return res.status(400).send(`User doesn't Exist`);
