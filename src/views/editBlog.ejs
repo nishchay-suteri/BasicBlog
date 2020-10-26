@@ -8,32 +8,14 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <title>Basic Blog</title>
+    <title>Edit Blog</title>
   </head>
   <body>
     <div class="container">
-        <h1>Basic Blog Web App</h1>
-        <a href="/blogs/new" class="btn btn-success">New Blog</a>
-        <% blogs.forEach(blog => { %>
-          <div class="card mt-4">
-            <div class="card-body">
-              <h4 class="card-title"><%= blog.blogTitle %></h4>
-              <div class="card-subtitle text-muted">
-                <%= blog.createdAt.toLocaleDateString() %>
-              </div>
-              <div class="card-text">
-                <%= blog.blogDescription %>
-              </div>
-              <a href="/blogs/<%=blog._id%>" class="btn btn-primary">Read More</a>
-              <a href="/blogs/edit/<%=blog._id%>" class="btn btn-info">Edit</a>
-              <form action="/blogs/delete/<%=blog._id%>" method="POST" class="d-inline">
-                <!-- NEVER EVER USE <a> tag for delete .. since crawler will call this functioin and all the entries will be deleted-->
-                <!-- Therefore, instead of <a> or button alone, using button inside form-->
-                  <button type="submit" class="btn btn-danger">Delete</button>
-              </form>
-            </div>
-          </div>
-        <% }) %>
+        <h1>Edit Blog</h1>
+        <form action="/blogs/edit/<%=blog._id%>" method="POST">
+            <%- include('_blog_form_fields') %>
+        </form>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

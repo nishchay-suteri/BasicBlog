@@ -10,7 +10,7 @@ const flash = require('connect-flash');
 // Declared js files
 const GLOBALS = require('./constants/globals');
 const sessionMw = require('./middlewares/sessionMw');
-const { indexRouter , loginRouter, registerRouter, userRouter } = require('./routes/baseRoutes');
+const { indexRouter , loginRouter, registerRouter, userRouter, blogsRouter } = require('./routes/baseRoutes');
 
 // Variables
 const app = express();
@@ -35,14 +35,14 @@ app.set('view engine', 'ejs');
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useCreateIndex', true);
-// mongoose.set('useFindAndModify', false);
+mongoose.set('useFindAndModify', false);
 
 // Middlewares - Routes
 app.use(indexRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/user', userRouter);
-
+app.use('/blogs', blogsRouter);
 
 // DB Connection
 /*
