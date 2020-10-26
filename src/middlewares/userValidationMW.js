@@ -16,7 +16,8 @@ const loginUserValidationMW = (req,res,next) => {
     const {value, error} = loginUserValidator(req.body);
     if(error)
     {
-        return res.status(400).send(error.details[0].message);
+        req.flash('serverError', error.details[0].message);
+        return res.redirect('/login');
     }
     else
     {

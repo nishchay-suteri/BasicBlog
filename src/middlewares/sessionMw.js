@@ -18,8 +18,8 @@ const sessionStore = new MongoStore({
 const sessionMw = session({
     store: sessionStore,
     secret: GLOBALS.SESS_SECRET,
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     name: GLOBALS.SESSION_NAME,
     cookie: {
         maxAge: GLOBALS.SESS_LIFETIME, // Max Age of cookie in milli-seconds

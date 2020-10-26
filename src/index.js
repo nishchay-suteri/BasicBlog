@@ -5,6 +5,7 @@ const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const flash = require('connect-flash');
 
 // Declared js files
 const GLOBALS = require('./constants/globals');
@@ -22,6 +23,7 @@ app.use(cors({optionsSuccessStatus: 200}));
 // app.set('trust-proxy', 1); // => Since behind proxy, we'll be using http (NOT https), but our cookie is configured "Secure"(Secure: IN_PROD)
 
 app.use(sessionMw);
+app.use(flash());
 app.use(express.static(path.join(__dirname, '../public'))); // To serve static contents
 app.use(express.json()); // Parse JSON bodies (as sent by API clients)
 app.use(express.urlencoded({extended: true})); // Parse URL-encoded bodies (as sent by HTML forms)
