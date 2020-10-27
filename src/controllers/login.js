@@ -4,7 +4,7 @@ const UserDAO = require('../dao/User');
 
 const loginGetController = (req,res) => {
     // display form
-    res.render('login', {serverError : req.flash('serverError')});
+    res.render('login', {serverError : req.flash('serverError'), user: req.session.user});
 }
 
 const loginPostController = async (req,res) => {

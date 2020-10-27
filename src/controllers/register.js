@@ -3,7 +3,7 @@ const UserDAO = require('../dao/User');
 
 const registerGetController = (req,res) => {
     // display form
-    res.render('register');
+    res.render('register', {user: req.session.user});
 }
 
 const registerPostController = async (req,res) => {

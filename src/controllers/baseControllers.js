@@ -1,6 +1,7 @@
 const indexController = require('./index');
 const userController = require('./user');
 const {loginPostController, loginGetController} = require('./login');
+const {logoutPostController} = require('./logout');
 const {registerGetController, registerPostController} = require('./register');
 const {newBlogGetController, newBlogPostController, createdBlogGetController, deleteBlogPostController, editBlogGetController, editBlogPostController} = require('./blog');
 
@@ -16,5 +17,6 @@ module.exports = {
     createdBlogGetController,
     editBlogGetController,
     editBlogPostController,
-    deleteBlogPostController
+    deleteBlogPostController,
+    logoutPostController
 }

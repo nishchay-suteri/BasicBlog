@@ -2,7 +2,7 @@ const BlogDAO = require('../dao/Blog');
 
 const newBlogGetController = (req,res) => {
     // display form
-    res.render('newBlog', {blog: BlogDAO.getBlankBlog()});
+    res.render('newBlog', {blog: BlogDAO.getBlankBlog(), user: req.session.user});
 }
 
 const newBlogPostController = async (req,res)=>{
@@ -21,7 +21,7 @@ const createdBlogGetController = async (req, res) => {
         const blog = await BlogDAO.findBlogByID(req,res);
         if(blog)
         {
-            res.render('showBlog', {blog: blog});
+            res.render('showBlog', {blog: blog, user: req.session.user});
         }
         else
         {
@@ -39,7 +39,7 @@ const editBlogGetController = async(req,res) => {
         const blog = await BlogDAO.findBlogByID(req,res);
         if(blog)
         {
-            res.render('editBlog', {blog: blog});
+            res.render('editBlog', {blog: blog, user: req.session.user});
         }
         else
         {
