@@ -12,6 +12,7 @@
   </head>
   <body>
     <div class="container">
+      <%- include('_navigation_bar') %>
         <h1>New Blog</h1>
         <form action="/blogs/new" method="POST">
             <%- include('_blog_form_fields') %>

@@ -12,6 +12,7 @@
   </head>
   <body>
     <div class="container">
+      <%- include('_navigation_bar') %>
       <% if ( (typeof(serverError) != 'undefined') && (serverError.length > 0)){ %>
       <div class="alert alert-danger" role="alert">
         <%= serverError %>
