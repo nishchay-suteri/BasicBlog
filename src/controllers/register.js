@@ -3,7 +3,7 @@ const UserDAO = require('../dao/User');
 
 const registerGetController = (req,res) => {
     // display form
-    res.render('register', {user: req.session.user});
+    res.render('register', {user: req.session.user, serverError : req.flash('serverError')});
 }
 
 const registerPostController = async (req,res) => {
@@ -14,17 +14,17 @@ const registerPostController = async (req,res) => {
         const emailExist = await UserDAO.findUserByEmail(req,res);
         if(emailExist)
         {
-            return res.status(400).send(`${req.body.userEmail} already exists`);
+            req.flash('serverError', `${req.body.userEmail} already exists`);
+            return res.redirect('/register');
         }
        
         try{
-            const createdUser = UserDAO.createUser(req, res);
+            const createdUser = await UserDAO.createUser(req, res);
             req.session.user = createdUser;
             // redirect
             return res.redirect(`/user`);
         }
         catch(err){
-            console.error(err);
             return res.status(400).send(`Server Error!`);
         }
         

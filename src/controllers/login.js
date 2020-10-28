@@ -23,7 +23,6 @@ const loginPostController = async (req,res) => {
             return res.redirect('/login');
         }
         req.session.user = user;
-        req.flash('serverSuccess', 'Successfully Logged In');
         return res.redirect('/user');
     }
     catch(err)
