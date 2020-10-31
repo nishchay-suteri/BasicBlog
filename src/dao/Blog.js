@@ -9,6 +9,7 @@ const createBlog = async (req,res) => {
     const blog = new Blog({
         blogTitle: req.body.blogTitle,
         blogDescription: req.body.blogDescription,
+        createdBy: req.session.user
     });
     try{
         // SEND DATA TO DB TO STORE USER
@@ -16,6 +17,7 @@ const createBlog = async (req,res) => {
         return createdBlog;
     }
     catch(err){
+        console.log(err);
         return res.status(400).send(`Server Error!`);
     }
 }

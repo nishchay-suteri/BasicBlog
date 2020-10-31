@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-
+const UserSchema = require('./User').UserSchema;
+ 
 const BlogSchema = new mongoose.Schema(
     {
         blogTitle: {
@@ -11,6 +12,10 @@ const BlogSchema = new mongoose.Schema(
         blogDescription: {
             type: String,
             required: true
+        },
+        createdBy: {
+            type: UserSchema,
+            default: {}
         }
     },
     {
