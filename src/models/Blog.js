@@ -14,8 +14,15 @@ const BlogSchema = new mongoose.Schema(
             required: true
         },
         createdBy: {
-            type: UserSchema,
-            default: {}
+            _id: {
+                type: mongoose.ObjectId
+            },
+            userName: {
+                type: String,
+                minlength: 1,
+                maxlength: 255,
+                required: true
+            }
         }
     },
     {
