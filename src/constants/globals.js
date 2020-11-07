@@ -8,7 +8,7 @@ const DEFAULT_ENV = 'development';
 const DEFAULT_SESSION_NAME = 'sessionId'; // We can remove this, just added to check
 const DEFAULT_SESS_SECRET = 'mySecret'; // We can remove this, just added to check
 
-const SERVER_PORT = process.env.SERVER_PORT || DEFAULT_PORT;
+const SERVER_PORT = process.env.PORT || DEFAULT_PORT;
 const SESS_LIFETIME = Number(process.env.SESS_LIFETIME || TWO_HOURS);
 const NODE_ENV = process.env.NODE_ENV || DEFAULT_ENV;
 const SESSION_NAME = process.env.SESSION_NAME || DEFAULT_SESSION_NAME;
