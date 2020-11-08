@@ -1,48 +1,81 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
     <title>Register Page</title>
   </head>
   <body>
     <div class="container">
-        <%- include('_navigation_bar') %>
-        <% if ( (typeof(serverError) != 'undefined') && (serverError.length > 0)){ %>
-            <div class="alert alert-danger" role="alert">
-              <%= serverError %>
+      <%- include('_navigation_bar') %> <% if ( (typeof(serverError) !=
+      'undefined') && (serverError.length > 0)){ %>
+      <div class="alert alert-danger" role="alert"><%= serverError %></div>
+      <%} %>
+      <h1>Register</h1>
+      <div class="row">
+        <div class="col-md-6">
+          <form method="POST" action="/register">
+            <div class="form-group">
+              <label for="u_name">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="u_name"
+                name="userName"
+                required
+                placeholder="Provide Your Name*"
+              />
             </div>
-            <%} %>
-        <h1>Register</h1>
-        <div class="row">
-            <div class="col-md-6">
-                <form method="POST" action="/register">
-                    <div class="form-group">
-                        <label for="u_name">Name</label>
-                        <input type="text" class="form-control" id="u_name" name="userName" required placeholder="Provide Your Name*">
-                    </div>
-                    <div class="form-group">
-                        <label for="u_email">Email</label>
-                        <input type="email" class="form-control" id="u_email" name="userEmail" required placeholder="Email*">
-                    </div>
-                    <div class="form-group">
-                        <label for="u_password" >Password</label>
-                        <input type="password" class="form-control" id="u_password" name="userPassword" required placeholder="Provide Password*">
-                    </div>
-                    <div class="form-group">
-                        <label for="u_confirm_password" >Confirm Password</label>
-                        <input type="password" class="form-control" id="u_confirm_password" name="userConfirmPassword" required placeholder="Confirm Password*">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+            <div class="form-group">
+              <label for="u_email">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="u_email"
+                name="userEmail"
+                required
+                placeholder="Email*"
+              />
             </div>
+            <div class="form-group">
+              <label for="u_password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="u_password"
+                name="userPassword"
+                required
+                placeholder="Provide Password*"
+              />
+            </div>
+            <div class="form-group">
+              <label for="u_confirm_password">Confirm Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="u_confirm_password"
+                name="userConfirmPassword"
+                required
+                placeholder="Confirm Password*"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
         </div>
-        
+      </div>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

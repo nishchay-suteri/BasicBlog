@@ -1,10 +1,26 @@
 <div class="form-group">
-    <label for="b_title">Title</label>
-    <input type="text" class="form-control" id="b_title" name="blogTitle" required placeholder="Provide Blog Title*" value="<%= blog.blogTitle %>">
+  <label for="b_title">Title</label>
+  <input
+    type="text"
+    class="form-control"
+    id="b_title"
+    name="blogTitle"
+    required
+    placeholder="Provide Blog Title*"
+    value="<%= blog.blogTitle %>"
+  />
 </div>
 <div class="form-group">
-    <label for="b_description">Description</label>
-    <textarea class="form-control" name="blogDescription" id="b_description" required placeholder="Provide Description"><%= blog.blogDescription %></textarea>
+  <label for="b_description">Description</label>
+  <textarea
+    class="form-control"
+    name="blogDescription"
+    id="b_description"
+    required
+    placeholder="Provide Description"
+  >
+<%= blog.blogDescription %></textarea
+  >
 </div>
 <a href="/" class="btn btn-secondary">Cancel</a>
 <button type="submit" class="btn btn-primary">Save</button>
